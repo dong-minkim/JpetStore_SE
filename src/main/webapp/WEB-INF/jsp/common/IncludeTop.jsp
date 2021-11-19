@@ -54,41 +54,50 @@
 </div>
 
 <div id="Menu">
-<div id="MenuContent"><stripes:link
-	beanclass="org.mybatis.jpetstore.web.actions.CartActionBean"
-	event="viewCart">
-	<img align="middle" name="img_cart" src="../images/cart.gif" />
-</stripes:link> <img align="middle" src="../images/separator.gif" /> <c:if
-	test="${sessionScope.accountBean == null}">
+	<div id="MenuContent">
+	<stripes:link beanclass="org.mybatis.jpetstore.web.actions.CartActionBean"
+	event="viewCart"><img align="middle" name="img_cart" src="../images/cart.gif" />
+	</stripes:link> <img align="middle" src="../images/separator.gif" />
+	<c:if test="${sessionScope.accountBean == null}">
 	<stripes:link
 		beanclass="org.mybatis.jpetstore.web.actions.AccountActionBean"
 		event="signonForm">
-          Sign In
-	    </stripes:link>
-</c:if> <c:if test="${sessionScope.accountBean != null}">
+		Sign In
+	</stripes:link>
+	</c:if>
+	<c:if test="${sessionScope.accountBean != null}">
 	<c:if test="${!sessionScope.accountBean.authenticated}">
 		<stripes:link
 			beanclass="org.mybatis.jpetstore.web.actions.AccountActionBean"
 			event="signonForm">
             Sign In
-	      </stripes:link>
+		</stripes:link>
 	</c:if>
-</c:if> <c:if test="${sessionScope.accountBean != null}">
+	</c:if>
+	<c:if test="${sessionScope.accountBean != null}">
 	<c:if test="${sessionScope.accountBean.authenticated}">
 		<stripes:link
 			beanclass="org.mybatis.jpetstore.web.actions.AccountActionBean"
 			event="signoff">
             Sign Out
-	      </stripes:link>
+		</stripes:link>
 		<img align="middle" src="../images/separator.gif" />
 		<stripes:link
 			beanclass="org.mybatis.jpetstore.web.actions.AccountActionBean"
 			event="editAccountForm">
             My Account
-	      </stripes:link>
+		</stripes:link>
 	</c:if>
-</c:if> <img align="middle" src="../images/separator.gif" /> <a
-	href="../help.html">?</a></div>
+	</c:if>
+	<img align="middle" src="../images/separator.gif" />
+	<a href="../help.html">?</a>
+		<img align="middle" src="../images/separator.gif" />
+		<stripes:link
+				beanclass="org.mybatis.jpetstore.web.actions.OrderActionBean"
+				event="viewPopular">
+			Popular Pets
+		</stripes:link>
+	</div>
 </div>
 
 <div id="Search">

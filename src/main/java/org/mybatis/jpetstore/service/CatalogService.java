@@ -60,6 +60,10 @@ public class CatalogService {
     return productMapper.getProductListByCategory(categoryId);
   }
 
+  public void delItem(String itemId) {
+    itemMapper.delItem(itemId);
+  }
+
   /**
    * Search product list.
    *

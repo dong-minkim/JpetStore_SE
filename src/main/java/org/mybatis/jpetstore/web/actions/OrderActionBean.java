@@ -27,6 +27,7 @@ import net.sourceforge.stripes.action.SessionScope;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
 import org.mybatis.jpetstore.domain.Order;
+import org.mybatis.jpetstore.domain.Popular;
 import org.mybatis.jpetstore.service.OrderService;
 
 /**
@@ -44,6 +45,7 @@ public class OrderActionBean extends AbstractActionBean {
   private static final String NEW_ORDER = "/WEB-INF/jsp/order/NewOrderForm.jsp";
   private static final String SHIPPING = "/WEB-INF/jsp/order/ShippingForm.jsp";
   private static final String VIEW_ORDER = "/WEB-INF/jsp/order/ViewOrder.jsp";
+  private static final String VIEW_POPULAR = "/WEB-INF/jsp/order/ViewPopular.jsp";
 
   private static final List<String> CARD_TYPE_LIST;
 
@@ -54,6 +56,7 @@ public class OrderActionBean extends AbstractActionBean {
   private boolean shippingAddressRequired;
   private boolean confirmed;
   private List<Order> orderList;
+  private List<Popular> popularList;
 
   static {
     CARD_TYPE_LIST = Collections.unmodifiableList(Arrays.asList("Visa", "MasterCard", "American Express"));
@@ -98,6 +101,9 @@ public class OrderActionBean extends AbstractActionBean {
   public List<Order> getOrderList() {
     return orderList;
   }
+
+  public List<Popular> getPopularList(){
+    return popularList;}
 
   /**
    * List orders.
@@ -182,6 +188,16 @@ public class OrderActionBean extends AbstractActionBean {
       setMessage("You may only view your own orders.");
       return new ForwardResolution(ERROR);
     }
+  }
+
+  /*
+   *필수 기능 추가
+   */
+  public Resolution viewPopular(){
+
+    popularList=orderService.getPopularOrderLists();
+
+    return new ForwardResolution(VIEW_POPULAR);
   }
 
   /**

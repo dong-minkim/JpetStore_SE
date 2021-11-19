@@ -19,6 +19,7 @@ import java.util.List;
 
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.SessionScope;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 
@@ -158,6 +159,7 @@ public class CatalogActionBean extends AbstractActionBean {
     return new ForwardResolution(VIEW_CATEGORY);
   }
 
+
   /**
    * View product.
    *
@@ -169,6 +171,14 @@ public class CatalogActionBean extends AbstractActionBean {
       product = catalogService.getProduct(productId);
     }
     return new ForwardResolution(VIEW_PRODUCT);
+  }
+
+  public RedirectResolution delItem () {
+    if (itemId != null) {
+      catalogService.delItem(itemId);
+    }
+    return new RedirectResolution(CatalogActionBean.class, "viewProduct")
+            .addParameter("productId", productId);
   }
 
   /**

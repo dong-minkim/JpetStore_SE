@@ -106,4 +106,16 @@
     VALUES (#{orderId,jdbcType=NUMERIC}, #{orderId,jdbcType=NUMERIC}, #{orderDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
   </insert>
 
+  <select id="getPopularOrderLists" resultType="Popular">
+    SELECT A.itemid as itemId, A.num,
+           item.attr1, item.attr2, item.attr3, item.attr4,item.attr5,
+           product.name
+    FROM (SELECT SUM(lineitem.quantity) as num, lineitem.itemid
+          FROM lineitem
+          GROUP BY lineitem.itemid) as A
+    JOIN item ON A.itemid=item.itemid
+    JOIN product ON product.productid=item.productid
+    ORDER BY num DESC;
+  </select>
+
 </mapper>

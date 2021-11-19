@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.mybatis.jpetstore.domain.Item;
 import org.mybatis.jpetstore.domain.Order;
+import org.mybatis.jpetstore.domain.Popular;
 import org.mybatis.jpetstore.domain.Sequence;
 import org.mybatis.jpetstore.mapper.ItemMapper;
 import org.mybatis.jpetstore.mapper.LineItemMapper;
@@ -108,6 +109,7 @@ public class OrderService {
     return orderMapper.getOrdersByUsername(username);
   }
 
+  public List<Popular> getPopularOrderLists(){return orderMapper.getPopularOrderLists();}
   /**
    * Gets the next id.
    *
