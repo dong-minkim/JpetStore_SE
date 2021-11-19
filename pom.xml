@@ -119,11 +119,28 @@
       <artifactId>slf4j-simple</artifactId>
       <version>1.7.32</version>
     </dependency>
+    <!-- 기존
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>${hsqldb.version}</version>
     </dependency>
+-->
+    <!-- MySQL -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.13</version>
+    </dependency>
+
+
+    <!--SpringJdbc -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.4</version>
+    </dependency>
+
 
     <!-- Test dependencies -->
     <dependency>
