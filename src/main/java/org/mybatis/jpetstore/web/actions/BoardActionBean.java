@@ -15,9 +15,9 @@ public class BoardActionBean extends AbstractActionBean {
 
     // private static final long serialVersionUID = L;
 
-    private static final String NEW_BOARD = "/WEB-INF/jsp/board/WriteBoardForm.jsp";
-    private static final String LIST_BOARD = "/WEB-INF/jsp/board/ListBoard.jsp";
-    private static final String VIEW_BOARD = "/WEB-INF/jsp/board/ViewBoard.jsp";
+    private static final String NEW_BOARD = "/WEB-INF/jsp/Board/WriteBoardForm.jsp";
+    private static final String LIST_BOARD = "/WEB-INF/jsp/Board/ListBoard.jsp";
+    private static final String VIEW_BOARD = "/WEB-INF/jsp/Board/ViewBoard.jsp";
 
     @SpringBean
     private transient BoardService boardService;
@@ -61,14 +61,10 @@ public class BoardActionBean extends AbstractActionBean {
      * @return the resolution
      */
 
-    @DefaultHandler
+
     public Resolution listBoard() {
         boardList = boardService.getBoardList();
-        for (int i = 0; i < boardList.size(); i++){
-            System.out.println(boardList.get(i).getBoardId() + " " +
-                    boardList.get(i).getUsername() + " " + boardList.get(i).getTitle() + " " +
-                    boardList.get(i).getContent());
-        }
+
         return new ForwardResolution(LIST_BOARD);
     }
 
