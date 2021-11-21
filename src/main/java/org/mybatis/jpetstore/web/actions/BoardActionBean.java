@@ -122,6 +122,12 @@ public class BoardActionBean extends AbstractActionBean {
      */
     public Resolution newBoard() {
         setUsername();
+        if(board.getTitle()==null||board.getContent()==null){
+            setMessage("You must write the content and title.\n" +
+                    "Please post and try checking your text.");
+            return new ForwardResolution(NEW_BOARD);
+        }
+
         boardService.insertBoard(board);
         boardList = boardService.getBoardList();
         return new ForwardResolution(LIST_BOARD);
