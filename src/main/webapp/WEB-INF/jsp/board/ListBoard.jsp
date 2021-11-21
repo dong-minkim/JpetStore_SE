@@ -1,5 +1,9 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
+<div id="BackLink"><stripes:link
+        beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
+    Return to Main Menu</stripes:link></div>
+
 <div id="Board" style="text-align: center;">
     <stripes:link class="Button"
                   beanclass="org.mybatis.jpetstore.web.actions.BoardActionBean"
