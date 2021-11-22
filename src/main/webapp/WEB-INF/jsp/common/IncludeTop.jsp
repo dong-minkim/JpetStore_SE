@@ -96,14 +96,12 @@
 			Mating
 		</stripes:link>
 
-<c:if test="${sessionScope.accountBean != null}">
 		<img align="middle" src="../images/separator.gif" />
 		<stripes:link
-				beanclass="org.mybatis.jpetstore.web.actions.MailActionBean"
-				event="mailBoard">
+				beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
+				event="listReceive">
 			<img align="middle" name="img_postbox" src="../images/postbox.gif" />
 		</stripes:link>
-</c:if>
 	</div>
 </div>
 
