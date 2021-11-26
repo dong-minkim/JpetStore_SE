@@ -33,8 +33,16 @@ public interface OrderMapper {
 
   Order getOrder(int orderId);
 
+  Order getOrderDate(int orderId);
+
   void insertOrder(Order order);
 
   void insertOrderStatus(Order order);
+
+  void delOrder(int orderId);
+
+  void delOrderStatus(int orderId);
+
+  void BackInventoryQuantity(int orderId);
 
 }

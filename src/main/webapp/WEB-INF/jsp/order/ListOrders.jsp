@@ -24,6 +24,7 @@
 		<th>Order ID</th>
 		<th>Date</th>
 		<th>Total Price</th>
+		<th>Order Cancel</th>
 	</tr>
 
 	<c:forEach var="order" items="${actionBean.orderList}">
@@ -38,6 +39,14 @@
 				pattern="yyyy/MM/dd hh:mm:ss" /></td>
 			<td>$<fmt:formatNumber value="${order.totalPrice}"
 				pattern="#,##0.00" /></td>
+			<td>
+				<stripes:link class="Button"
+							  beanclass="org.mybatis.jpetstore.web.actions.OrderActionBean"
+							  event="delOrder">
+					<stripes:param name="orderId" value="${order.orderId}" />
+					CANCEL
+				</stripes:link>
+			</td>
 		</tr>
 	</c:forEach>
 </table>

@@ -22,6 +22,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.SessionScope;
 import net.sourceforge.stripes.integration.spring.SpringBean;
@@ -53,6 +54,7 @@ public class OrderActionBean extends AbstractActionBean {
   private transient OrderService orderService;
 
   private Order order = new Order();
+  private int orderId;
   private boolean shippingAddressRequired;
   private boolean confirmed;
   private List<Order> orderList;
@@ -188,6 +190,25 @@ public class OrderActionBean extends AbstractActionBean {
       setMessage("You may only view your own orders.");
       return new ForwardResolution(ERROR);
     }
+  }
+
+  /*
+  차별화 기능 추가 - delOrder
+   */
+  public Resolution delOrder(){
+    HttpSession session = context.getRequest().getSession();
+    AccountActionBean accountBean = (AccountActionBean) session.getAttribute("accountBean");
+
+    order = orderService.getOrderDate(orderId);
+
+    if (order!= null){
+      orderService.delOrder(orderId);
+      return new RedirectResolution(OrderActionBean.class, "listOrders");
+    }else{
+      setMessage("Can't cancel your Order.");
+      return new ForwardResolution(ERROR);
+    }
+
   }
 
   /*

@@ -78,6 +78,27 @@ public class OrderService {
   }
 
   /**
+   * Delete order.
+   *
+   * @param orderId
+   *          the order id
+   * @return the order
+   */
+
+  public Order delOrder(int orderId) {
+    Order order = orderMapper.getOrder(orderId);
+
+    order.getLineItems().forEach(lineItem -> {
+      Item item = itemMapper.getItem(lineItem.getItemId());
+      item.setQuantity(itemMapper.getInventoryQuantity(lineItem.getItemId()));
+      lineItem.setItem(item);
+    });
+    orderMapper.delOrderStatus(orderId);
+    orderMapper.BackInventoryQuantity(orderId);
+    return order;
+  }
+
+  /**
    * Gets the order.
    *
    * @param orderId
@@ -96,6 +117,10 @@ public class OrderService {
     });
 
     return order;
+  }
+
+  public Order getOrderDate(int orderId) {
+    return orderMapper.getOrderDate(orderId);
   }
 
   /**
