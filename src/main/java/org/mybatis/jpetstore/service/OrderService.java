@@ -1,18 +1,3 @@
-/*
- *    Copyright 2010-2021 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
 package org.mybatis.jpetstore.service;
 
 import java.util.HashMap;
@@ -44,7 +29,7 @@ public class OrderService {
   private final LineItemMapper lineItemMapper;
 
   public OrderService(ItemMapper itemMapper, OrderMapper orderMapper, SequenceMapper sequenceMapper,
-      LineItemMapper lineItemMapper) {
+                      LineItemMapper lineItemMapper) {
     this.itemMapper = itemMapper;
     this.orderMapper = orderMapper;
     this.sequenceMapper = sequenceMapper;
@@ -84,7 +69,6 @@ public class OrderService {
    *          the order id
    * @return the order
    */
-
   public Order delOrder(int orderId) {
     Order order = orderMapper.getOrder(orderId);
 
@@ -97,7 +81,6 @@ public class OrderService {
     orderMapper.BackInventoryQuantity(orderId);
     return order;
   }
-
   /**
    * Gets the order.
    *
@@ -122,7 +105,6 @@ public class OrderService {
   public Order getOrderDate(int orderId) {
     return orderMapper.getOrderDate(orderId);
   }
-
   /**
    * Gets the orders by username.
    *
@@ -146,7 +128,7 @@ public class OrderService {
     Sequence sequence = sequenceMapper.getSequence(new Sequence(name, -1));
     if (sequence == null) {
       throw new RuntimeException(
-          "Error: A null sequence was returned from the database (could not get next " + name + " sequence).");
+              "Error: A null sequence was returned from the database (could not get next " + name + " sequence).");
     }
     Sequence parameterObject = new Sequence(name, sequence.getNextId() + 1);
     sequenceMapper.updateSequence(parameterObject);
