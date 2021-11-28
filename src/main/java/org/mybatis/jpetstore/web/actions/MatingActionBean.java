@@ -31,6 +31,7 @@ public class MatingActionBean extends AbstractActionBean{
     private int age;
     private String content;
     private List<Mating> matingList;
+    private FileBean newAttachment;
 
     public Mating getMating() {
         return mating;
@@ -104,6 +105,13 @@ public class MatingActionBean extends AbstractActionBean{
         this.matingList = matingList;
     }
 
+    public FileBean getNewAttachment() {
+        return newAttachment;
+    }
+
+    public void setNewAttachment(FileBean newAttachment) {
+        this.newAttachment = newAttachment;
+    }
 
     public String getUsername() {
         HttpSession session = context.getRequest().getSession();
@@ -201,4 +209,5 @@ public class MatingActionBean extends AbstractActionBean{
         mating = new Mating();
         matingList = null;
     }
+
 }

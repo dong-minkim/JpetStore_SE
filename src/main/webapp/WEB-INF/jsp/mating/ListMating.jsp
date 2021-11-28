@@ -1,8 +1,17 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
-<div id="BackLink"><stripes:link
-        beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
-    Return to Main Menu</stripes:link></div>
+<div id = "Tab">
+    <div id = "Return">
+        <stripes:link beanclass="org.mybatis.jpetstore.web.actions.MatingActionBean"
+                      event="categoryMating">
+            Return to Previous Page</stripes:link>
+        <div id = "BackLink">
+            <stripes:link
+                beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
+            Return to Main Menu</stripes:link></div>
+    </div>
+</div>
+
 
 <div id="Mating" style="text-align: center;">
     <stripes:link class="Button"
@@ -15,7 +24,7 @@
         <tr>
             <th>Writer</th>
             <th>Title</th>
-            <th>Species</th>
+            <th>Breed</th>
             <th>Sex</th>
             <th>Age</th>
         </tr>

@@ -1,5 +1,10 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
+<div id = "BackLink">
+    <stripes:link
+            beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
+        Return to Main Menu</stripes:link></div>
+
 <div id="header" style="text-align: center;">
 <h2>Choose the type of pet</h2>
 </div>
