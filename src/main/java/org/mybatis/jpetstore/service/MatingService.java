@@ -1,11 +1,13 @@
 package org.mybatis.jpetstore.service;
 
+import org.mybatis.jpetstore.domain.Account;
 import org.mybatis.jpetstore.domain.Mating;
 import org.mybatis.jpetstore.mapper.MatingMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MatingService {
@@ -23,5 +25,10 @@ public class MatingService {
     }
 
     @Transactional
-    public void insertMating(Mating mating) {matingMapper.insertMating(mating);}
+    public void insertMating(Mating mating) { matingMapper.insertMating(mating); }
+
+    public void delMating(int matingId) { matingMapper.delMating(matingId); }
+
+    public void editMating(Mating mating) { matingMapper.editMating((mating)); }
+
 }

@@ -2,12 +2,13 @@ package org.mybatis.jpetstore.web.actions;
 
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
-import net.sourceforge.stripes.validation.Validate;
 import org.mybatis.jpetstore.domain.Mating;
 import org.mybatis.jpetstore.service.MatingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @SessionScope
@@ -17,6 +18,9 @@ public class MatingActionBean extends AbstractActionBean{
     private static final String LIST_MATING = "/WEB-INF/jsp/mating/ListMating.jsp";
     private static final String VIEW_MATING = "/WEB-INF/jsp/mating/ViewMating.jsp";
     private static final String CATEGORY_MATING = "/WEB-INF/jsp/mating/CategoryMating.jsp";
+    private static final String EDIT_MATING = "/WEB-INF/jsp/mating/EditMatingForm.jsp";
+
+    private static final List<String> TYPE_LIST;
 
     @SpringBean
     private transient MatingService matingService;
@@ -31,7 +35,10 @@ public class MatingActionBean extends AbstractActionBean{
     private int age;
     private String content;
     private List<Mating> matingList;
-    private FileBean newAttachment;
+
+    static {
+        TYPE_LIST = Collections.unmodifiableList(Arrays.asList("DOGS", "REPTILES", "CATS", "BIRDS", "FISH"));
+    }
 
     public Mating getMating() {
         return mating;
@@ -63,6 +70,10 @@ public class MatingActionBean extends AbstractActionBean{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<String> getTypes() {
+        return TYPE_LIST;
     }
 
     public String getSpecies() {
@@ -105,14 +116,6 @@ public class MatingActionBean extends AbstractActionBean{
         this.matingList = matingList;
     }
 
-    public FileBean getNewAttachment() {
-        return newAttachment;
-    }
-
-    public void setNewAttachment(FileBean newAttachment) {
-        this.newAttachment = newAttachment;
-    }
-
     public String getUsername() {
         HttpSession session = context.getRequest().getSession();
         AccountActionBean accountBean = (AccountActionBean) session.getAttribute("/actions/Account.action");
@@ -122,7 +125,7 @@ public class MatingActionBean extends AbstractActionBean{
     public void setUsername() { mating.setUsername(getUsername()); }
 
     /**
-     * Category board.
+     * Category matiing.
      *
      * @return the resolution
      */
@@ -132,7 +135,7 @@ public class MatingActionBean extends AbstractActionBean{
 
 
     /**
-     * List board.
+     * List matiing.
      *
      * @return the resolution
      */
@@ -146,7 +149,7 @@ public class MatingActionBean extends AbstractActionBean{
     }
 
     /**
-     * View board.
+     * View matiing.
      *
      * @return the resolution
      */
@@ -189,7 +192,7 @@ public class MatingActionBean extends AbstractActionBean{
         }
     }
     /**
-     * New board.
+     * New matiing.
      *
      * @return the resolution
      */
@@ -210,4 +213,32 @@ public class MatingActionBean extends AbstractActionBean{
         matingList = null;
     }
 
+    /**
+     * Delete matiing.
+     *
+     * @return the redirectResolution
+     */
+    public RedirectResolution delMating() {
+        Integer val = matingId;
+        if (val != null) {
+            matingService.delMating(matingId);
+        }
+        return new RedirectResolution(MatingActionBean.class, "listMating")
+                .addParameter("type", type);
+    }
+
+    /**
+     * Edit matiing.
+     *
+     * @return the resolution
+     */
+    public Resolution editMatingForm() {
+        return new ForwardResolution(EDIT_MATING);
+    }
+
+    public Resolution editMating() {
+        matingService.editMating(mating);
+        mating = matingService.getMating(mating.getMatingId());
+        return new ForwardResolution(VIEW_MATING);
+    }
 }

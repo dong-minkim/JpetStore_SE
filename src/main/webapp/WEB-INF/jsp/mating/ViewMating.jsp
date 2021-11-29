@@ -44,21 +44,29 @@
             <td>content</td>
             <td width="500px" style="word-break:break-all">${actionBean.mating.content}</td>
         </tr>
-
-        <tr>
-            <td>image</td>
-            <td width="500px" style="word-break:break-all">
-                <img src="../uploadFile/${actionBean.mating.matingId}.gif" />
-            </td>
-        </tr>
     </table>
 
-    <stripes:link class="Button"
-                  beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
-                  event="writePostForm">
-        <stripes:param name="receiveUser" value="${actionBean.mating.username}"/>
-        Post Message
-    </stripes:link>
+    <c:if test="${sessionScope.accountBean.username != actionBean.mating.username}">
+        <stripes:link class="Button"
+                      beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
+                      event="writePostForm">
+            <stripes:param name="receiveUser" value="${actionBean.mating.username}"/>
+            Post Message
+        </stripes:link>
+    </c:if>
+    <c:if test="${sessionScope.accountBean.username == actionBean.mating.username}">
+        <stripes:link class="Button"
+                      beanclass="org.mybatis.jpetstore.web.actions.MatingActionBean"
+                      event="delMating">
+            <stripes:param name="matingID" value="${mating.matingID}"/>
+            Delete
+        </stripes:link>
+        <stripes:link class="Button"
+                      beanclass="org.mybatis.jpetstore.web.actions.MatingActionBean"
+                      event="editMatingForm">
+            Edit
+        </stripes:link>
+    </c:if>
 
 </div>
 

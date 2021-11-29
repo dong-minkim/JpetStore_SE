@@ -5,7 +5,7 @@
             beanclass="org.mybatis.jpetstore.web.actions.MatingActionBean"
             focus="">
 
-        <h3>Write Mating Form</h3>
+        <h3>Edit Mating Form</h3>
 
         <table style="margin-left: auto; margin-right: auto;">
             <tr>
@@ -19,9 +19,15 @@
 
             <tr>
                 <td>type</td>
-                <td><stripes:select name="mating.type">
-                    <stripes:options-collection collection="${actionBean.types}" />
-                </stripes:select></td>
+                <td>
+                    <stripes:select name="mating.type">
+                        <option value="DOGS" selected>dog</option>
+                        <option value="CATS" >cat</option>
+                        <option value="BIRDS">bird</option>
+                        <option value="REPTILES">reptile</option>
+                        <option value="FISH">fish</option>
+                    </stripes:select>
+                </td>
             </tr>
 
             <tr>
@@ -51,7 +57,7 @@
             </tr>
         </table>
 
-        <stripes:submit name="newMating" value="submit" />
+        <stripes:submit name="editMating" value="Save Mating Information" />
 
     </stripes:form></div>
 

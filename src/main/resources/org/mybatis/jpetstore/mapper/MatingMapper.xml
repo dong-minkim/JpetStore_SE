@@ -24,4 +24,20 @@
     VALUES (#{title}, #{type}, #{username}, #{species}, #{sex}, #{age}, #{content})
   </insert>
 
+  <delete id="delMating">
+    DELETE
+    FROM MATING
+    WHERE matingId = #{matingId}
+  </delete>
+
+  <update id="editMating" parameterType="Mating">
+    UPDATE MATING SET
+    title = #{title},
+    type  = #{type},
+    species = #{species},
+    sex = #{sex},
+    age = #{age},
+    content = #{content}
+    WHERE matingId=#{matingId}
+  </update>
 </mapper>
