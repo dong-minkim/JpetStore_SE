@@ -24,9 +24,9 @@ public class PostService {
         return postMapper.getPostList(sendUser);
     }
 
-    public List<Post> getReceiveList(String receiver) {
-        return postMapper.getReceiveList(receiver);
-    }
+    public List<Post> getReceiveList(String receiver) { return postMapper.getReceiveList(receiver); }
+
+    public int getPostchk(String receiver) { return postMapper.getPostchk(receiver); }
 
     @Transactional
     public void insertPost(Post post) {

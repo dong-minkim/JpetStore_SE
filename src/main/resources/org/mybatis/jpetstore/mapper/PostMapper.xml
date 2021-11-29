@@ -25,6 +25,12 @@
     ORDER BY idx DESC
   </select>
 
+  <select id="getPostchk" resultType="int">
+    SELECT count(*) as num
+    FROM post
+    WHERE receiveUser = #{receiveUser} AND status = 'N';
+  </select>
+
   <insert id="insertPost" parameterType="Post">
     INSERT INTO post (sendUser, receiveUser, title, content)
     VALUES (#{sendUser}, #{receiveUser}, #{title}, #{content})

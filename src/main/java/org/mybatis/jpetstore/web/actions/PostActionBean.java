@@ -35,6 +35,7 @@ public class PostActionBean extends AbstractActionBean {
     private char status;
     private String createdAt;
     private List<Post> postList;
+    private int postSize;
 
     public Post getPost() { return post; }
 
@@ -71,6 +72,10 @@ public class PostActionBean extends AbstractActionBean {
     public List<Post> getPostList() { return postList; }
 
     public void setPostList(List<Post> postList) { this.postList = postList; }
+
+    public int getPostSize() { return postSize; }
+
+    public void setPostSize(int postSize) { this.postSize = postSize; }
 
     /**
      * List board.
@@ -129,6 +134,12 @@ public class PostActionBean extends AbstractActionBean {
                 if (post.getStatus() == 'N'){
                     postService.updateStatus(idx);
                 }
+                postSize = postService.getPostchk(accountBean.getUsername());
+                if (postSize == 0){
+                    accountBean.setHavePost(false);
+                    session.setAttribute("accountBean",accountBean);
+                }
+
             }
             return new ForwardResolution(VIEW_POST);
         }
@@ -177,7 +188,7 @@ public class PostActionBean extends AbstractActionBean {
         }
         post.setSendUser(accountBean.getUsername());
         postService.insertPost(post);
-        postList = postService.getReceiveList(accountBean.getUsername());
+        postList = postService.getReceiveList(post.getSendUser());
         return new ForwardResolution(LIST_SEND);
     }
 

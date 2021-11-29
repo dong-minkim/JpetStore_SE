@@ -1,18 +1,3 @@
-/*
- *    Copyright 2010-2021 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
 package org.mybatis.jpetstore.web.actions;
 
 import java.util.Arrays;
@@ -31,8 +16,10 @@ import net.sourceforge.stripes.validation.Validate;
 
 import org.mybatis.jpetstore.domain.Account;
 import org.mybatis.jpetstore.domain.Product;
+import org.mybatis.jpetstore.domain.Post;
 import org.mybatis.jpetstore.service.AccountService;
 import org.mybatis.jpetstore.service.CatalogService;
+import org.mybatis.jpetstore.service.PostService;
 
 /**
  * The Class AccountActionBean.
@@ -55,10 +42,14 @@ public class AccountActionBean extends AbstractActionBean {
   private transient AccountService accountService;
   @SpringBean
   private transient CatalogService catalogService;
+  @SpringBean
+  private transient PostService postService;
 
   private Account account = new Account();
   private List<Product> myList;
+  private int myPostSize;
   private boolean authenticated;
+  private boolean havePost;
 
   static {
     LANGUAGE_LIST = Collections.unmodifiableList(Arrays.asList("english", "japanese"));
@@ -103,9 +94,17 @@ public class AccountActionBean extends AbstractActionBean {
     return CATEGORY_LIST;
   }
 
+  public int getmyPostSize() { return myPostSize; }
+
+  public void setmyPostSize(int myPostSize) { this.myPostSize = myPostSize; }
+
   public Resolution newAccountForm() {
     return new ForwardResolution(NEW_ACCOUNT);
   }
+
+  public boolean getHavePost() { return havePost; }
+
+  public void setHavePost(boolean havePost) { this.havePost = havePost; }
 
   /**
    * New account.
@@ -169,6 +168,11 @@ public class AccountActionBean extends AbstractActionBean {
       account.setPassword(null);
       myList = catalogService.getProductListByCategory(account.getFavouriteCategoryId());
       authenticated = true;
+      havePost = false;
+      myPostSize = postService.getPostchk(account.getUsername());
+      if (myPostSize > 0){
+        havePost = true;
+      }
       HttpSession s = context.getRequest().getSession();
       // this bean is already registered as /actions/Account.action
       s.setAttribute("accountBean", this);

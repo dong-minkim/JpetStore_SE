@@ -12,6 +12,8 @@ public interface PostMapper {
 
     List<Post> getReceiveList(String receiver);
 
+    int getPostchk(String receiver);
+
     void insertPost(Post post);
 
     void updateStatus(int idx);
