@@ -15,7 +15,7 @@
         <tr>
             <th>Writer</th>
             <th>Title</th>
-            <th>ID</th>
+            <th>NO</th>
         </tr>
         <c:forEach var="board" items="${actionBean.boardList}">
             <tr>
@@ -31,3 +31,5 @@
         </c:forEach>
     </table>
 </div>
+
+<%@ include file="../common/IncludeBottom.jsp"%>
