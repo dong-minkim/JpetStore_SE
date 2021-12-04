@@ -7,6 +7,8 @@ import org.mybatis.jpetstore.service.MatingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +21,7 @@ public class MatingActionBean extends AbstractActionBean{
     private static final String VIEW_MATING = "/WEB-INF/jsp/mating/ViewMating.jsp";
     private static final String CATEGORY_MATING = "/WEB-INF/jsp/mating/CategoryMating.jsp";
     private static final String EDIT_MATING = "/WEB-INF/jsp/mating/EditMatingForm.jsp";
+    private String imagePath = "/Users/82105/SE/jpetstore-6/src/main/webapp/images/post/";
 
     private static final List<String> TYPE_LIST;
 
@@ -35,6 +38,8 @@ public class MatingActionBean extends AbstractActionBean{
     private int age;
     private String content;
     private List<Mating> matingList;
+    private String path;
+    private FileBean fileBean;
 
     static {
         TYPE_LIST = Collections.unmodifiableList(Arrays.asList("DOGS", "REPTILES", "CATS", "BIRDS", "FISH"));
@@ -62,14 +67,6 @@ public class MatingActionBean extends AbstractActionBean{
 
     public void setMatingId(int matingId) {
         this.matingId = matingId;
-    }
-
-    public String getType(String type) {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public List<String> getTypes() {
@@ -108,6 +105,14 @@ public class MatingActionBean extends AbstractActionBean{
         this.content = content;
     }
 
+    public String getPath() {
+        return mating.getPath();
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public List<Mating> getMatingList() {
         return matingList;
     }
@@ -124,12 +129,25 @@ public class MatingActionBean extends AbstractActionBean{
 
     public void setUsername() { mating.setUsername(getUsername()); }
 
+    public String getType(String type) {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type=type;
+    }
+
+    public FileBean getFileBean() { return fileBean; }
+
+    public void setFileBean(FileBean fileBean) { this.fileBean = fileBean; }
+
     /**
      * Category matiing.
      *
      * @return the resolution
      */
     public Resolution categoryMating() {
+        System.out.println("category mating");
         return new ForwardResolution(CATEGORY_MATING);
     }
 
@@ -145,6 +163,10 @@ public class MatingActionBean extends AbstractActionBean{
         if(type != null){
             matingList = matingService.getMatingList(type);
         }
+
+        
+
+        System.out.println("1"+type);
         return new ForwardResolution(LIST_MATING);
     }
 
@@ -197,19 +219,43 @@ public class MatingActionBean extends AbstractActionBean{
      * @return the resolution
      */
     public Resolution newMating() {
-        setUsername();
-        if(mating.getTitle()==null||mating.getSpecies()==null
-                ||mating.getContent()==null){
-            setMessage("Please post and try checking your text.");
-            return new ForwardResolution(NEW_MATING);
+        try {
+            setUsername();
+            if(mating.getTitle()==null|| mating.getSpecies()==null
+                    ||mating.getContent()==null){
+                setMessage("Please post and try checking your text.");
+                return new ForwardResolution(NEW_MATING);
+            }
+            matingService.insertMating(mating);
+            int last_insert = matingService.matingLastInsert();
+            if (fileBean != null){
+                fileBean.getContentType();
+                fileBean.getSize();
+
+                imagePath = "/Users/82105/SE/jpetstore-6/src/main/webapp/images/post/";
+                imagePath += Integer.toString(last_insert);
+                imagePath += fileBean.getFileName();
+                mating.setMatingId(last_insert);
+                String path = "/images/post/";
+                path += Integer.toString(last_insert);
+                path += fileBean.getFileName();
+                mating.setPath(path);
+                matingService.insertPath(mating);
+                fileBean.save(new File(imagePath));
+            }
+
+            matingList = matingService.getMatingList(type);
+            return new ForwardResolution(LIST_MATING);
         }
-        matingService.insertMating(mating);
-        matingList = matingService.getMatingList(type);
-        return new ForwardResolution(LIST_MATING);
+        catch (IOException ex){
+            matingList = matingService.getMatingList(type);
+            return new ForwardResolution(LIST_MATING);
+        }
     }
 
     public void clear() {
         mating = new Mating();
+        fileBean=null;
         matingList = null;
     }
 

@@ -39,6 +39,7 @@
 		<th>Description</th>
 		<th>List Price</th>
 		<th>&nbsp;</th>
+		<th> </th>
 	</tr>
 	<c:forEach var="item" items="${actionBean.itemList}">
 		<tr>

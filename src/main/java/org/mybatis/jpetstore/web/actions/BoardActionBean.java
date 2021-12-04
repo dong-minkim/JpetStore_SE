@@ -138,4 +138,5 @@ public class BoardActionBean extends AbstractActionBean {
         boardList = null;
     }
 
+
 }

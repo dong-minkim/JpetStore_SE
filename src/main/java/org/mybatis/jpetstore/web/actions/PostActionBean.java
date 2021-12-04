@@ -1,9 +1,6 @@
 package org.mybatis.jpetstore.web.actions;
 
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.SessionScope;
+import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import org.mybatis.jpetstore.domain.Board;
 import org.mybatis.jpetstore.domain.Post;
@@ -131,7 +128,7 @@ public class PostActionBean extends AbstractActionBean {
             Integer val = idx;
             if (val != null) {
                 post = postService.getPost(idx);
-                if (post.getStatus() == 'N'){
+                if (!post.getSendUser().equals(accountBean.getUsername())&&post.getStatus() == 'N'){
                     postService.updateStatus(idx);
                 }
                 postSize = postService.getPostchk(accountBean.getUsername());
@@ -194,7 +191,28 @@ public class PostActionBean extends AbstractActionBean {
 
     public void clear() {
         post = new Post();
+        post = new Post();
         postList = null;
     }
 
+    //보낸 쪽지 삭제 상태 변경
+    public RedirectResolution updateSend() {
+        postService.updateSend(idx);
+        postService.delPost(idx);
+        return new RedirectResolution(PostActionBean.class,"listPostView");
+    }
+
+    //받은 쪽지 삭제 상태 변경
+    public RedirectResolution updateRecv() {
+        postService.updateRecv(idx);
+        postService.delPost(idx);
+        HttpSession session = context.getRequest().getSession();
+        AccountActionBean accountBean = (AccountActionBean) session.getAttribute("/actions/Account.action");
+        postSize = postService.getPostchk(accountBean.getUsername());
+        if (postSize == 0){
+            accountBean.setHavePost(false);
+            session.setAttribute("accountBean",accountBean);
+        }
+        return new RedirectResolution(PostActionBean.class,"listReceiveView");
+    }
 }

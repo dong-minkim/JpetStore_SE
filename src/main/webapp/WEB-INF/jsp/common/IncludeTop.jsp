@@ -100,7 +100,7 @@
 					<stripes:link
 							beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
 							event="listReceive">
-						<img align="middle" name="img_postbox" src="../images/postbox.gif" />
+						<img align="middle" src="../images/postbox.gif" />
 					</stripes:link>
 					<c:if test="${sessionScope.accountBean.havePost}">
 						💡New Post💡
@@ -141,7 +141,7 @@
 	</stripes:link> <img src="../images/separator.gif" /> <stripes:link
 			beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean"
 			event="viewCategory">
-		<stripes:param name="categoryId" value="BIRDS" />
+		<stripes:param name="categoryId" value="BIR	DS" />
 		<img src="../images/sm_birds.gif" />
 	</stripes:link></div>
 

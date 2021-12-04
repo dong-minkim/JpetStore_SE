@@ -1,9 +1,19 @@
 <%@ include file="../common/IncludeTop.jsp"%>
-
-<div id="Board" style="">
+<div id = "Tab">
+    <div id = "Return">
+        <stripes:link beanclass="org.mybatis.jpetstore.web.actions.BoardActionBean"
+                      event="listBoard">
+            Return to Board List</stripes:link>
+        <div id = "BackLink">
+            <stripes:link
+                    beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
+                Return to Main Menu</stripes:link></div>
+    </div>
+</div>
+<div id="Board" style="text-align: center;">
     <h3>Board</h3>
 
-    <table >
+    <table style="margin-left: auto; margin-right: auto;">
         <tr>
             <td >writer</td>
             <td>${actionBean.board.username}</td>
@@ -19,11 +29,7 @@
         </tr>
     </table>
 
-    <stripes:link class="Button"
-                  beanclass="org.mybatis.jpetstore.web.actions.BoardActionBean"
-                  event="listBoard">
-        List
-    </stripes:link>
+
 </div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>

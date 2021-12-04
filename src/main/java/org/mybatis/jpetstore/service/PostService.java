@@ -35,4 +35,17 @@ public class PostService {
 
     @Transactional
     public void updateStatus(int idx){ postMapper.updateStatus(idx); }
+
+
+    public void delPost(int idx) {
+        postMapper.delPost(idx);
+    }
+
+    public void updateSend(int idx) {
+        postMapper.updateSend(idx);
+    }
+
+    public void updateRecv(int idx) {
+        postMapper.updateRecv(idx);
+    }
 }

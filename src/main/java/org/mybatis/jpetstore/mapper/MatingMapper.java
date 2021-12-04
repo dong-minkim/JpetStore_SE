@@ -16,4 +16,8 @@ public interface MatingMapper {
     void delMating(int matingId);
 
     void editMating(Mating mating);
+
+    void insertPath(Mating mating);
+
+    int matingLastInsert();
 }

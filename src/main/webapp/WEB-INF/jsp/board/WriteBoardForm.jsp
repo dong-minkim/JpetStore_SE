@@ -1,12 +1,13 @@
 <%@ include file="../common/IncludeTop.jsp"%>
 
-<div id="Board"><stripes:form
+<div id="Board" style="text-align: center;">
+    <stripes:form
         beanclass="org.mybatis.jpetstore.web.actions.BoardActionBean"
         focus="">
 
-    <h3>Board </h3>
+    <h3 style="text-align:center;"> Board </h3>
 
-    <table>
+    <table style="margin-left: auto; margin-right: auto;">
         <tr>
             <td>writer</td>
 

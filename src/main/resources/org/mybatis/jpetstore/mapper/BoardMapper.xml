@@ -22,4 +22,5 @@
     VALUES (#{username}, #{title}, #{content})
   </insert>
 
+
 </mapper>

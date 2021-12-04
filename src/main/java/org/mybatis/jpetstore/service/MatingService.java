@@ -24,11 +24,15 @@ public class MatingService {
         return matingMapper.getMatingList(type);
     }
 
+    public int matingLastInsert() { return matingMapper.matingLastInsert(); }
+
     @Transactional
     public void insertMating(Mating mating) { matingMapper.insertMating(mating); }
 
     public void delMating(int matingId) { matingMapper.delMating(matingId); }
 
     public void editMating(Mating mating) { matingMapper.editMating((mating)); }
+
+    public void insertPath(Mating mating) { matingMapper.insertPath(mating); }
 
 }

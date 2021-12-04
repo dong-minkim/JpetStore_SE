@@ -17,9 +17,9 @@
 
 -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
+		 xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 version="2.5">
 	<display-name>JPetStore</display-name>
 	<description>Online Pet Store Sample Application</description>
 	<context-param>
@@ -40,6 +40,14 @@
 		<init-param>
 			<param-name>Extension.Packages</param-name>
 			<param-value>net.sourceforge.stripes.integration.spring</param-value>
+		</init-param>
+		<init-param>
+			<param-name>MultipartWrapper.Class</param-name>
+			<param-value>net.sourceforge.stripes.controller.multipart.CommonsMultipartWrapper</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FileUpload.MaximumPostSize</param-name>
+			<param-value>10mb</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

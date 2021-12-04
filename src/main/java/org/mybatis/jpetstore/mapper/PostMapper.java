@@ -18,4 +18,9 @@ public interface PostMapper {
 
     void updateStatus(int idx);
 
+    void delPost(int idx);
+
+    void updateSend(int idx);
+
+    void updateRecv(int idx);
 }

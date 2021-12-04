@@ -20,6 +20,8 @@ public class Post implements Serializable {
     private String content;
     private char status;
     private String createdAt;
+    private char recvdel;
+    private char senddel;
 
     public int getIdx() {
         return idx;
@@ -75,5 +77,21 @@ public class Post implements Serializable {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public char getSenddel() {
+        return senddel;
+    }
+
+    public void setSenddel(char senddel) {
+        this.senddel= senddel;
+    }
+
+    public char getRecvdel() {
+        return recvdel;
+    }
+
+    public void setRecvdel(char recvdel) {
+        this.recvdel= recvdel;
     }
 }

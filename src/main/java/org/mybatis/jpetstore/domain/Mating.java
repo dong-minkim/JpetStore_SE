@@ -14,6 +14,7 @@ public class Mating implements Serializable {
     private String sex;
     private int age;
     private String content;
+    private String path;
 
     public int getMatingId() {
         return matingId;
@@ -79,4 +80,7 @@ public class Mating implements Serializable {
         this.content = content;
     }
 
+    public String getPath() { return path; }
+
+    public void setPath(String path) { this.path = path; }
 }

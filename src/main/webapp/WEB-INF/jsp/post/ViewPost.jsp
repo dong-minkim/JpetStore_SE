@@ -23,8 +23,14 @@
 
     <stripes:link class="Button"
                   beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
+                  event="listReceive">
+        Back to ReceiveList
+    </stripes:link>
+
+    <stripes:link class="Button"
+                  beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
                   event="listPost">
-        Back to List
+        Back to SendList
     </stripes:link>
 </div>
 

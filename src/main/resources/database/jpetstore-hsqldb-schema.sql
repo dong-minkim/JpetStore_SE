@@ -172,3 +172,16 @@ create table board (
                        constraint pk_board primary key (boardid),
                        constraint fk_board_1 foreign key (username) references signon (username)
 );
+
+create table mating (
+                        matingId int not null identity,
+                        title varchar(45) not null,
+                        type varchar(20) not null,
+                        username varchar(20) not null,
+                        species varchar(20) not null,
+                        sex varchar(6) not null,
+                        age int not null,
+                        content varchar(500) not null,
+                        constraint pk_mating primary key (matingId),
+                        constraint fk_mating_1 foreign key (username) references signon (username)
+);

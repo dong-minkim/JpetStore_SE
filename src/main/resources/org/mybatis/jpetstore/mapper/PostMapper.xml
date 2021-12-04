@@ -7,28 +7,33 @@
 
   <select id="getPost" resultType="Post">
     SELECT idx, sendUser, receiveUser, title, content, status, date_format(createdAt, '%y-%m-%d %H:%i') as createdAt
+         ,recvdel,senddel
     FROM post
     WHERE idx = #{idx}
   </select>
 
   <select id="getPostList" resultType="Post">
     SELECT idx, sendUser, receiveUser, title, content, status, date_format(createdAt, '%y-%m-%d %H:%i') as createdAt
+         ,recvdel,senddel
     FROM post
     WHERE sendUser = #{sendUser}
+      and senddel ='N'
     ORDER BY idx DESC
   </select>
 
   <select id="getReceiveList" resultType="Post">
     SELECT idx, sendUser, receiveUser, title, content, status, date_format(createdAt, '%y-%m-%d %H:%i') as createdAt
+         ,recvdel,senddel
     FROM post
     WHERE receiveUser = #{receiveUser}
+      and recvdel ='N'
     ORDER BY idx DESC
   </select>
 
   <select id="getPostchk" resultType="int">
     SELECT count(*) as num
     FROM post
-    WHERE receiveUser = #{receiveUser} AND status = 'N';
+    WHERE receiveUser = #{receiveUser} AND status = 'N' AND recvdel ='N';
   </select>
 
   <insert id="insertPost" parameterType="Post">
@@ -40,4 +45,21 @@
     UPDATE post SET status = 'Y' WHERE idx = #{idx}
   </update>
 
+  <delete id="delPost">
+    DELETE
+    FROM post
+    WHERE recvdel ='Y' and senddel ='Y' ;
+  </delete>
+
+  <update id="updateRecv" parameterType="Post">
+    UPDATE post SET recvdel ='Y' WHERE idx =#{idx}
+  </update>
+
+  <update id="updateSend" parameterType="Post">
+    UPDATE post SET senddel ='Y' WHERE idx =#{idx}
+  </update>
+
+
+
 </mapper>
+

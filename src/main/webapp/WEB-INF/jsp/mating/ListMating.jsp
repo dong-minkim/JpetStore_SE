@@ -7,11 +7,10 @@
             Return to Previous Page</stripes:link>
         <div id = "BackLink">
             <stripes:link
-                    beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
-                Return to Main Menu</stripes:link></div>
+                beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
+            Return to Main Menu</stripes:link></div>
     </div>
 </div>
-
 
 <div id="Mating" style="text-align: center;">
     <stripes:link class="Button"

@@ -1,6 +1,7 @@
 package org.mybatis.jpetstore.service;
 
 import org.mybatis.jpetstore.domain.Board;
+import org.mybatis.jpetstore.domain.Mating;
 import org.mybatis.jpetstore.mapper.BoardMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,4 +29,5 @@ public class BoardService {
     public void insertBoard(Board board) {
         boardMapper.insertBoard(board);
     }
+
 }

@@ -24,8 +24,9 @@
             <th>Writer</th>
             <th>Title</th>
             <th>Date</th>
-            <th>isRead</th>
+            <th>IsRead</th>
             <th>sendPost</th>
+            <th>Delete</th>
         </tr>
         <c:forEach var="post" items="${actionBean.postList}">
             <tr>
@@ -44,8 +45,17 @@
                     <stripes:param name="receiveUser" value="${post.sendUser}"/>
                     Post
                 </stripes:link></td>
+                <td>
+                    <stripes:link class="Button"
+                                  beanclass="org.mybatis.jpetstore.web.actions.PostActionBean"
+                                  event="updateRecv">
+                        <stripes:param name="idx" value="${post.idx}" />
+                        DELETE
+                    </stripes:link>
+                </td>
             </tr>
         </c:forEach>
     </table>
 </div>
 <%@ include file="../common/IncludeBottom.jsp"%>
+

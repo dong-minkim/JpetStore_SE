@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/IncludeTop.jsp"%>
 
-<div id="BackLink"><stripes:link
+<div id="BackLink" ><stripes:link
         beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean">
     Return to Main Menu</stripes:link></div>
 
+<div id="Popular" style="text-align: center;">
 <h2>Popular Pets</h2>
-<table>
+<table style="margin-left: auto; margin-right: auto;">
     <tr>
         <th>ItemId</th>
         <th>Description</th>
@@ -33,5 +34,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 
 <%@ include file="../common/IncludeBottom.jsp"%>
